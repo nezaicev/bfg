@@ -29,53 +29,15 @@ class SimpleEcho(WebSocket):
         wss.remove(self)
         print(self.address, 'closed')
 
-def test():
+def alert():
     if rs.get('update'):
         rs_data = rs.get('update').decode('utf-8')
         if wss:
             for ws in wss:
                 ws.sendMessage(str(rs_data))
-    t=threading.Timer(5.0,test)
+    t=threading.Timer(550.0,alert)
     t.start()
 
 server = SimpleWebSocketServer('', 8001, SimpleEcho)
-test()
+alert()
 server.serveforever()
-
-#
-# import asyncio
-# import datetime
-# import random
-# import websockets
-# import transaction
-# from pyramid.threadlocal import get_current_registry
-# from test_python.test_python.models import (
-#             get_engine,
-#             get_session_factory,
-#             get_tm_session,
-#             )
-#
-# from test_python.test_python import models
-# from test_python.test_python.utils import get_answers_to_api
-# from sqlalchemy import func
-#
-# async def time(websocket, path):
-#     while True:
-#         registry = get_current_registry()
-#         settings = registry.settings
-#         engine = get_engine(settings)
-#         session_factory = get_session_factory(engine)
-#         with transaction.manager:
-#             dbsession = get_tm_session(session_factory, transaction.manager)
-#             list_requests = dbsession.query(models._Request).all()
-#             print(list_requests)
-#
-#         # now = datetime.datetime.utcnow().isoformat() + "Z"
-#         await websocket.send('test')
-#         await asyncio.sleep(random.random() * 3)
-#
-# start_server = websockets.serve(time, "127.0.0.1", 5678)
-#
-# asyncio.get_event_loop().run_until_complete(start_server)
-# asyncio.get_event_loop().run_forever()
-#
