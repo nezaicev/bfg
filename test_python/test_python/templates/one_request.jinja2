@@ -1,0 +1,52 @@
+{% extends "index_layout.jinja2" %}
+
+{% block content %}
+
+
+            <select  name='query' onchange="top.location=this.value ">
+                <option selected="selected" id="opt0" value="/answers?query={{ query }}&page=1&count=25&sort=desc">Количество записей</option>
+                <option id="opt1" value="/answers?query={{ query }}&page=1&count=25&sort=desc">25</option>
+                <option id="opt2" value="/answers?query={{ query }}&page=1&count=50&sort=desc">50</option>
+                <option id="opt1" value="/answers?query={{ query }}&page=1&count=100&sort=desc">100</option>
+            </select>
+
+
+<div class="content">
+
+  <table class="table">
+  <thead>
+    <tr>
+
+      <th scope="col">Дата/время последней активности
+          <a id="sort"  href="/answers?query={{ query }}&page={{ now_page }}&count={{ count_items }}&sort=asc">^</a>
+          <a id="sort"  href="/answers?query={{ query }}&page={{ now_page }}&count={{ count_items }}&sort=desc">V</a>
+      </th>
+      <th scope="col">Заголовок</th>
+      <th scope="col">Доп.</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for answer in answers %}
+    <tr>
+          <td>{{answer.creation_date}}</td>
+          <td>{{answer.title}}</td>
+
+
+    </tr>
+    {% endfor %}
+
+
+  </tbody>
+</table>
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-end">
+    {% for page in range(page_count) %}
+    <li class="page-item"><a class="page-link" href="/answers?query={{ query }}&page={{loop.index}}&count={{ count_items }}&sort={{ sort }}">{{ loop.index }}</a></li>
+    {% endfor %}
+  </ul>
+</nav>
+
+
+
+</div>
+{% endblock content %}

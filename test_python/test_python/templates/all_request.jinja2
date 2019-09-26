@@ -1,0 +1,64 @@
+{% extends "index_layout.jinja2" %}
+
+{% block content %}
+
+    <form action="/search">
+    <div class="col-auto my-1">
+      <button type="text" class="btn btn-primary">Новый поиск</button>
+    </div>
+    </form>
+
+<div class="content">
+  <table class="table">
+  <thead>
+    <tr>
+{#      <th scope="col">#</th>#}
+      <th scope="col">Дата/время запроса</th>
+      <th scope="col">Запрос</th>
+      <th scope="col">Доп.</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for request in requests %}
+    <tr>
+          <td>{{request.create_date}}</td>
+          <td>
+              <a href="/answers?query={{request.name}}&page=1&count=25&sort=desc">{{request.name}}</a>>
+
+          </td>
+
+    </tr>
+    {% endfor %}
+
+
+  </tbody>
+</table>
+
+{# <tbody>#}
+{##}
+{#    <tr>#}
+{#{% for dump in dumps %}#}
+{##}
+{#      <td>{{dump.dump__side_number}}</td>#}
+{#      <td>{{dump.dump__dump_model}}</td>#}
+{#      <td>{{dump.dump__max_tonnage}}</td>#}
+{#      <td>{{dump.tonnage}}</td>#}
+{##}
+{#        {% if dump.overload > 0 %}#}
+{#            <td>{{dump.overload}}</td>#}
+{#        {% else %}#}
+{#            <td>0</td>#}
+{#        {% endif %}#}
+{##}
+{##}
+{#    </tr>#}
+{##}
+{#  {% endfor %}#}
+{#  </tbody>#}
+{#</table>#}
+
+
+
+
+</div>
+{% endblock content %}

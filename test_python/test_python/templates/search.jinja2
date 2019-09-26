@@ -1,0 +1,13 @@
+{% extends "index_layout.jinja2" %}
+
+{% block content %}
+          <form action="/request" method="get" >
+ <div class="input-group mb-3">
+  <input type="text" name='query'class="form-control" placeholder="Search input" aria-label="Search input" aria-describedby="button-addon2">
+  <div class="input-group-append">
+    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Search</button>
+  </div>
+</div>
+</form>
+
+{% endblock content %}
