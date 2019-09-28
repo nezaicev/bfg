@@ -1,8 +1,9 @@
 from SimpleWebSocketServer import SimpleWebSocketServer, WebSocket
 import threading
+from test_python.test_python.utils import rs
 import redis
 import pickle
-rs = redis.StrictRedis(host='localhost', port=6379, db=1)
+# rs = redis.StrictRedis(host='localhost', port=6379, db=1)
 wss=[]
 class SimpleEcho(WebSocket):
 
@@ -35,7 +36,8 @@ def alert():
         if wss:
             for ws in wss:
                 ws.sendMessage(str(rs_data))
-    t=threading.Timer(550.0,alert)
+    # t=threading.Timer(550.0,alert)
+    t = threading.Timer(550.0, alert)
     t.start()
 
 server = SimpleWebSocketServer('', 8001, SimpleEcho)

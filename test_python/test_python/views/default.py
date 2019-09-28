@@ -9,15 +9,15 @@ from test_python.utils import pagination
 from test_python.utils import get_answers_to_api
 from test_python.utils import api_p
 from sqlalchemy import func
+from test_python.utils import rs
 
-import redis
 import pickle
 
 
 
 from .. import models
 
-rs = redis.StrictRedis(host='localhost', port=6379, db=1)
+# rs = redis.StrictRedis(host='localhost', port=6379, db=1)
 
 @view_config(route_name='index', renderer='../templates/all_request.jinja2')
 def index(request):

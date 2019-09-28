@@ -2,10 +2,11 @@ import gzip
 import json
 from collections import namedtuple
 from pyramid.request import Request
+import redis
 
 api_p=namedtuple('api','url pagesize order sort tagged site')('https://api.stackexchange.com/2.2/search?'
                                                               ,5,'desc','creation','','stackoverflow')
-
+rs = redis.StrictRedis(host='localhost', port=6379, db=1)
 def pagination(items,page_now,answers):
     list_end = items * int(page_now)
     list_start = list_end - items

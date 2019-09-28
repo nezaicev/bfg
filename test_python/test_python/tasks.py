@@ -10,10 +10,10 @@ from test_python.models import (
 from test_python import models
 from test_python.utils import get_answers_to_api
 from sqlalchemy import func
-import redis
+from test_python.utils import rs
 
 
-rs = redis.StrictRedis(host='localhost', port=6379, db=1)
+# rs = redis.StrictRedis(host='localhost', port=6379, db=1)
 
 @app.task
 def update(*args, **kwargs):
